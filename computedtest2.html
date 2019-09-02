@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.jsでComputedを使うサンプル</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="number" v-model.number="maxLength">
+        <p>ご感想は、{{maxLength}}文字以内でご入力ください</p>
+        <textarea v-model="myText" cols="40" rows="7"></textarea>
+        <p v-bind:style="{color: computedColor}">残り{{ramaining}}文字です。</p>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                myText:"今日は、いい天気です",
+                maxLength:140
+            },
+            computed:{
+                ramaining:function(){
+                    return this.maxLength - this.myText.length;
+                },
+                computedColor:function(){
+                    col = "green";
+                    if (this.ramaining < 20){
+                        col = "orange";
+                    }
+                    if (this.ramaining < 1){
+                        col = "red";
+                    }
+                    return col;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

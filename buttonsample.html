@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js sample</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app2">
+        <button value="いいね" v-bind:disabled="isClick" v-on:click="oneClick">いいね</button>
+    </div>
+    <script>
+        function iine(){
+            alert("いいね");
+        }
+        new Vue({
+            el:"#app2",
+            data:{
+                isClick:false
+            },
+            methods:{
+                oneClick:function(){
+                    iine();
+                    this.isClick=true;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

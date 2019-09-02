@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js sample</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{count}}</p>
+        <button @click="countUp">1増やす</button>
+    </div>
+    <div id="app2">
+        <button value="いいね" v-bind:disabled="true" v-on:click="oneClick">いいね</button>
+    </div>
+    <script>
+        
+        new Vue({
+            el:"#app",
+            data:{
+                count : 0
+            },
+            methods:{
+                countUp : function(){
+                    this.count++;
+                }
+            }
+        })
+        new Vue({
+            el:"#app2",
+            data:{
+                isClick:false
+            },
+            methods:{
+                oneClick:function(){
+                    this.isClick = true;
+                    alert("いいね");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

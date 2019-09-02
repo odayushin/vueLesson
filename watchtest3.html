@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.jsでwatchを使うサンプル</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+</head>
+<body>
+    <h2>TweenMaxのテスト</h2>
+    <div id="app">
+        <p>値は、{{animeNumber}}です</p>
+        <input type="number" v-model.number="myNumber">
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                myNumber: 0,
+                tweenedNumber: 0
+            },
+            watch:{
+                myNumber: function(){
+                    TweenMax.to(this.$data, 1, {tweenedNumber: this.myNumber})
+                }
+            },
+            computed:{
+                animeNumber: function(){
+                    return this.tweenedNumber.toFixed(0);
+                }
+            }
+        })
+        function myMove(){
+            TweenMax.to('#movebtn', 1, {x: "500px"});
+        }
+    </script>
+</body>
+</html>

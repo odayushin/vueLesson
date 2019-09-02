@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js sample</title>
+    <!--link rel="stylesheet" href="style.css"-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <hr>
+    <h2>クリックしたらカウントアップ</h2>
+    <div id="app">
+        <p>{{count}}回</p>
+        <button v-on:click="countUp">カウント</button>
+        <p>{{pushCount}}回押しました</p>
+    </div>
+    <hr>
+    <div id="hello" v-text="mytext"></div>
+    <hr>
+    <div id="vhtml"><p v-html="myhtml"></p></div>
+    <hr>
+    <div id="datatype" v-bind:align="myalign">
+        <p>{{myNumber*1.08}}</p>
+        <p>{{myStr + "!!!!"}}</p>
+        <p>{{myBool}}</p>
+    </div>
+    <hr>
+    <div id="array">
+        <p>{{myArray}}</p>
+        <p>{{myArray[0]}}</p>
+        <hr>
+        <p>{{$data}}</p>
+        <hr>
+        <li v-for="(item, key) in myArray">{{item}}</li>
+    </div>
+    <hr>
+    <div id="showImg">
+        <img v-bind:src="fileName"></img>
+    </div>
+    <hr>
+    <div id="vmodel">
+        <input v-model="myName" placeholder="お名前">
+        <p>私は、{{myName}}です。。</p>
+    </div>
+    <div id="vmdhtml">
+        <input v-model="inputhtml">
+        <p v-html="inputhtml"></p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                count:0,
+                pushCount:0
+            },
+            methods:{
+                countUp: function(){
+                    this.count+=2;
+                    this.pushCount++;
+                }
+            }
+        })
+        new Vue({
+            el:"#hello",
+            data:{
+                mytext:"Hello World"
+            }
+        })
+        new Vue({
+            el:"#vhtml",
+            data:{
+                myhtml:"<h1>Hello!!</h1>"
+            }
+        })
+        new Vue({
+            el:"#datatype",
+            data:{
+                myNumber:12345,
+                myStr:"Hey, World!",
+                myBool:true,
+                myalign:"center"
+            }
+        })
+        new Vue({
+            el:"#array",
+            data:{
+                myArray:['ダージリン', 'アールグレイ', 'セイロン']
+            }
+        })
+        new Vue({
+            el:"#showImg",
+            data:{
+                fileName:"./top.jpg"
+            }
+        })
+        new Vue({
+            el:"#vmodel",
+            data:{
+                myName:''
+            }
+        })
+        new Vue({
+            el:"#vmdhtml",
+            data:{
+                inputhtml:""
+            }
+        })
+    </script>
+</body>
+</html>

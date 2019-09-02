@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js Sample</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <label>
+            <input type="checkbox" v-model="myCheck">
+            チェックボックスは、{{myCheck}}
+        </label>
+    </div>
+    <hr>
+    <div id="app2">
+        <label>
+            <input type="checkbox" value="red" v-model="myChecks">
+            red
+        </label>
+        <br>
+        <label>
+                <input type="checkbox" value="green" v-model="myChecks">
+               green 
+        </label>
+        <br>
+        <label>
+                <input type="checkbox" value="blue" v-model="myChecks">
+                blue
+        </label><br>
+        選ばれたのは、<span v-for="item in myChecks">{{item + " "}}</span>
+    </div>
+    <div id="app3">
+        <label>
+            <input type="checkbox" v-model="myAgree">
+            同意します。
+        </label>
+        <button v-bind:disabled="myAgree==false">送信</button>
+    </div>
+
+    <hr>
+    <div id="app4">
+        <label>
+            <input type="radio" value="red" v-model="picked">red
+        </label><br>
+        <label>
+            <input type="radio" value="green" v-model="picked">green
+        </label><br>
+        <label>
+            <input type="radio" value="blue" v-model="picked">blue
+        </label><br>
+        {{picked}}を選択しました
+    </div>
+    <div id="app5">
+        <label>
+            <input type="radio" value="maimai.jpg" v-model="fileName">
+            まいまいの写真
+        </label><br>
+        <label>
+            <input type="radio" value="top.jpg" v-model="fileName">
+            オーロラの写真
+        </label><br>
+        <p>{{fileName}}を選択</p>
+        <img v-bind:src="fileName">
+    </div>
+    <hr>
+    <div id="app6">
+        <select v-model="myColor">
+            <option disabled value="">色を選択してください</option>
+            <option>red</option>
+            <option>green</option>
+            <option>blue</option>
+            <option>orange</option>
+            <option>brown</option>
+        </select>
+        <p v-bind:style="{color: myColor}">選んだのは、{{myColor}}です</p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                myCheck:false
+            }
+        })
+        new Vue({
+            el:"#app2",
+            data:{
+                myChecks:[]
+            }
+        })
+        new Vue({
+            el:"#app3",
+            data:{
+                myAgree:false
+            }
+        })
+        new Vue({
+            el:"#app4",
+            data:{
+                picked:''
+            }
+        })
+        new Vue({
+            el:"#app5",
+            data:{
+                fileName:''
+            }
+        })
+        new Vue({
+            el:"#app6",
+            data:{
+                myColor:''
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.jsでwatchを使うサンプル</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <h2>残り秒数が0になったら、アラートを出す例</h2>
+    <div id="app">
+        <p>あと、{{restSec}}秒</p>
+        <button v-on:click="startTimer">START</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                restSec: 5,
+                timerObj: null
+            },
+            methods:{
+                startTimer: function(){
+                    this.restSec = 5;
+                    this.timerObj = setInterval(()=>{this.restSec-- }, 1000)
+                }
+            },
+            watch:{
+                restSec:function(){
+                    if (this.restSec <= 0){
+                        alert("制限時間です。");
+                        clearInterval(this.timerObj);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

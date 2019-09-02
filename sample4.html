@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-on:keyup.shift.enter="showAlert" v-model.lazy="myText">
+        <p>{{myText}}</p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                myText:""
+            },
+            methods:{
+                showAlert:function(){
+                    alert("入力した値は「"+this.myText+"」です");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>google chartsととの連携</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div id="chart_div" style="height: 500px"></div>
+    <div id="app">
+        <li v-for="(item, c) in dataArray" v-if="c>0">
+            {{item[0]}} : {{item[1]}}
+            <button v-on:click="addOne(c)">+</button>
+            <button v-on:click="subOne(c)">-</button>
+        </li>
+        <input type="text" v-model="addItem">
+        <label><button v-on:click="pushItem">追加</button></label>
+    </div>
+    <script>
+        var orgdata = [
+            ['種類', '個数'],
+            ['幕の内', 3], ['カルビ弁当', 4], ['オムライス',5],
+            ['冷やし中華', 1], ['ビビンバ丼', 3],['ざるそば', 1]
+        ];
+
+        google.charts.load('visualization', {packages:['corechart']});
+        google.charts.setOnLoadCallback(drawBasic);
+
+        function drawBasic(){
+            var data = google.visualization.arrayToDataTable(orgdata);
+            var options = {title: '好きなランチ', "is3D": true};
+            var chart = new google.visualization.PieChart(
+                document.getElementById('chart_div')
+            );
+            chart.draw(data, options);
+        }
+        new Vue({
+            el:"#app",
+            data:{
+                dataArray:orgdata,
+                addItem:""
+            },
+            methods:{
+                addOne:function(val){
+                    var obj = this.dataArray[val];
+                    obj[1]++;
+                    this.dataArray.splice(val, 1, obj);
+                    drawBasic();
+                },
+                subOne:function(val){
+                    var obj = this.dataArray[val];
+                    obj[1]--;
+                    this.dataArray.splice(val, 1, obj);
+                    drawBasic();
+                },
+                pushItem:function(){
+                    this.dataArray.push([this.addItem,1]);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
